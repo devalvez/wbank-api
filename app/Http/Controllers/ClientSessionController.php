@@ -55,7 +55,7 @@ class ClientSessionController extends Controller
         try {
             $response = $this->client->request('POST', 'https://bank.qesh.ai/login', [
                 'body' => '{
-                        "client_name":"qesh",
+                        "client_name":"'.env('CLIENT_NAME').'",
                         "origin":"api",
                         "document":"'.$cpfCnpj.'",
                         "password":"' . $request->password . '"

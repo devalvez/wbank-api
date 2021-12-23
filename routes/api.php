@@ -31,10 +31,7 @@ Route::post('/tokens/create', function (Request $request) {
     return ['token' => $token->plainTextToken];
 });
 
-Route::group([
-    'middleware' => 'api',
-    'prefix' => 'auth'
-], function ($router) {
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('register', [AuthController::class, 'register']);
     Route::post('logout', [AuthController::class, 'logout']);
@@ -43,10 +40,7 @@ Route::group([
 });
 
 
-Route::group(['middleware' => 'api',
-    'prefix' => 'bank'
-], function ($router) {
-
+Route::group(['middleware' => 'api', 'prefix' => 'bank'], function ($router) {
 
     /*
     |--------------------------------------------------------------------------
@@ -160,20 +154,19 @@ Route::group(['middleware' => 'api',
     Route::post('payments/{id}', [PaymentsController::class, 'getPayments']);
 
     /*
-       |--------------------------------------------------------------------------
-       | API Routes Phone TopUps
-       |--------------------------------------------------------------------------
-       */
-
+      |--------------------------------------------------------------------------
+      | API Routes Phone TopUps
+      |--------------------------------------------------------------------------
+    */
+    
     //Controller Make Payment
-    Route::post('phone/list/operators/{stateCode} ', [PhoneRechargeController::class, 'listOperators']);
+    Route::post('phone/list/operators/{stateCode}', [PhoneRechargeController::class, 'listOperators']);
 
     //Controller Make Payment
     Route::post('phone/list/values/{stateCode}/{providerId} ', [PhoneRechargeController::class, 'availablevalues']);
 
     //Controller Make Payment
     Route::post('phone/charge ', [PhoneRechargeController::class, 'phoneCharge']);
-        Route::post('register/p/doc/driver/front', [ClientRegisterController::class, 'accountPersonRegisterDocDriverFront']);
-        Route::post('register/p/doc/driver/verse', [ClientRegisterController::class, 'accountPersonRegisterDocDriverVerse']);
-    });
+    Route::post('register/p/doc/driver/front', [ClientRegisterController::class, 'accountPersonRegisterDocDriverFront']);
+    Route::post('register/p/doc/driver/verse', [ClientRegisterController::class, 'accountPersonRegisterDocDriverVerse']);
 });
